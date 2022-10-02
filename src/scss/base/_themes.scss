@@ -1,0 +1,13 @@
+@use "vars" as *;
+@mixin spread-map($map: ()) {
+  @each $key, $value in $map {
+    #{$key}: $value;
+  }
+}
+
+:root[theme="light"] {
+  @include spread-map($theme-map-light);
+}
+:root[theme="dark"] {
+  @include spread-map($theme-map-dark);
+}

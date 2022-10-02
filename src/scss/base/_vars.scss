@@ -1,0 +1,53 @@
+$font-family: "Montserrat", "Roboto", sans-serif;
+
+$primary: --primary;
+$gradient: --gradient;
+$text-400: --text-400;
+$text-500: --text-500;
+$background-400: --background-400;
+$background-480: --background-480;
+$background-500: --background-500;
+$background-gradient: --background-gradient;
+$background-gradient2: --background-gradient2;
+$shadow: --shadow;
+$green: --green;
+$red: --red;
+
+$theme-map-dark: (
+        $primary: #F50,
+        $gradient: linear-gradient(to top left, var($primary), #F17B15),
+        $text-400: #fff,
+        $text-500: #3C424B,
+        $background-400: #2a2a32,
+        $background-480: #28282f,
+        $background-500: #232329,
+        $background-gradient: linear-gradient(to bottom right , var($background-400), #2D3037),
+        $background-gradient2: linear-gradient(to bottom left, var($background-500), #2c2d32),
+        $shadow: 0 3px 25px rgba(49, 49, 49, .25),
+        $green: #27c93f,
+        $red: #e74c3c,
+);
+
+$theme-map-light: (
+        $primary: #F50,
+        $gradient: linear-gradient(to top left, var($primary), #F17B15),
+        $text-400: #2a2a32,
+        $text-500: #232329,
+        $background-400: #fff,
+        $background-480: #e1e1e1,
+        $background-500: #e3e3e3,
+        $background-gradient: linear-gradient(to bottom right , var($background-400), var($background-500)),
+        $background-gradient2: linear-gradient(to bottom left, var($background-500), var($background-400)),
+        $shadow: 0 3px 25px rgba(49, 49, 49, .25),
+);
+
+@function theme-var($key, $fallback: null, $map: $theme-map-dark) {
+  @if not map-has-key($map, $key) {
+    @error "key: '#{$key}', is not a key in map: #{$map}";
+  }
+  @if ($fallback) {
+    @return var($key, $fallback);
+  } @else {
+    @return var($key);
+  }
+}

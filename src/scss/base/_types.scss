@@ -1,0 +1,33 @@
+@use "../mixins/fontSize" as *;
+
+$types: (
+  headerTitle: (
+    fontSize: font-sizeF(60),
+    fontWeight: 700,
+  ),
+  title: (
+    fontSize: font-sizeF(40),
+    fontWeight: 600,
+  ),
+  subtitle: (
+    fontSize: font-sizeF(24),
+    fontWeight: 600,
+  ),
+  text: (
+    fontSize: font-sizeF(18),
+    lineHeight: 1.4em,
+    fontWeight: 300,
+  ),
+);
+
+@mixin type($name){
+  @if(map-has-key($types, $name)){
+    $type: map-get($types, $name);
+    $fontSizeMap: map-get($type, fontSize);
+
+    font-size: map-get($fontSizeMap, fallback);
+    font-size: map-get($fontSizeMap, main);
+    font-weight: map-get($type, fontWeight);
+    line-height: map-get($type, lineHeight);
+  }
+}

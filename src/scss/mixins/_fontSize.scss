@@ -1,0 +1,29 @@
+//https://codepen.io/marianojmiguel/pen/vybGZq
+@use "sass:math";
+
+$typography-rem-base: 16;
+$typography-breakpoint: 1200;
+$typography-growth: 0.9;
+
+@mixin font-size($size, $enforce: false, $rule: null) {
+  // Setting enforce to true adds !important to our declarations. Useful for utility classes.
+  @if ($enforce == true) {
+    $rule: !important;
+  }
+
+  font-size: math.div($size, $typography-rem-base) * 1rem #{$rule};
+  font-size: calc(#{$typography-growth * 1rem} + #{(math.div($size - ($typography-growth * $typography-rem-base), $typography-breakpoint)) * 100vw}) #{$rule}
+}
+
+@function font-sizeF($size, $enforce: false, $rule: null) {
+  // Setting enforce to true adds !important to our declarations. Useful for utility classes.
+  @if ($enforce == true) {
+    $rule: !important;
+  }
+
+  @return (main: (calc(#{$typography-growth * 1rem} + #{(math.div($size - ($typography-growth * $typography-rem-base), $typography-breakpoint)) * 100vw}) #{$rule}), fallback: (math.div($size, $typography-rem-base) * 1rem #{$rule}));
+}
+
+html {
+  font-size: 100%;
+}
