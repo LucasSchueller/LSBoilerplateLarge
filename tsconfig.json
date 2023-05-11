@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -15,16 +19,29 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": [ "@andylacko/vite-svg-react-loader/svgType" ],
     "baseUrl": ".",
+    "types": [
+      "vite-plugin-svgr/client"
+    ],
     "paths": {
-      "@": ["src/*"],
-      "@scss/*": ["src/scss/*"],
-      "@img/*": ["src/img/*"],
+      "@": [
+        "src/*"
+      ],
+      "@styles/*": [
+        "src/styles/*"
+      ],
+      "@img/*": [
+        "src/img/*"
+      ]
     }
   },
   "include": [
-    "src"
+    "src",
+    "vite.config.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json"}]
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

@@ -1,3 +1,3 @@
-export default abstract class Config{
-
-}
+export default {
+  projectName: "LSBoilerplateLarge",
+};

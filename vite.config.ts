@@ -1,55 +1,37 @@
-import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
-// import svgLoader from '@andylacko/vite-svg-react-loader'
-import viteImagemin from "vite-plugin-imagemin";
-import path from "path"
+/* eslint-disable import/no-extraneous-dependencies */
+import react from "@vitejs/plugin-react";
+import path from "path";
+import { defineConfig } from "vite";
+import progress from "vite-plugin-progress";
+import sassDts from "vite-plugin-sass-dts";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        react(),
-        // svgLoader({
-        //     svgrOptions: {
-        //         icon: true,
-        //         // ...svgr options (https://react-svgr.com/docs/options/)
-        //     },
-        // }),
-        viteImagemin({
-            gifsicle: {
-                optimizationLevel: 7,
-                interlaced: false,
-            },
-            optipng: {
-                optimizationLevel: 7,
-            },
-            mozjpeg: {
-                quality: 20,
-            },
-            pngquant: {
-                quality: [0.8, 0.9],
-                speed: 4,
-            },
-            webp: {
-                quality: 75,
-            },
-            svgo: {
-                plugins: [
-                    {
-                        name: "removeViewBox",
-                    },
-                    {
-                        name: "removeEmptyAttrs",
-                        active: false,
-                    },
-                ],
-            },
-        }),
-    ],
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "src"),
-            "@scss": path.resolve(__dirname, "src/scss"),
-            "@img": path.resolve(__dirname, "src/img"),
-        }
+  plugins: [
+    react(),
+    sassDts(),
+    progress({
+      format: "building [:bar] :percent",
+      total: 200,
+      width: 60,
+      complete: "=",
+      incomplete: "",
+    }),
+    svgr({
+      exportAsDefault: true,
+      svgrOptions: {
+        // ...svgr options (https://react-svgr.com/docs/options/)
+        typescript: true,
+        expandProps: false,
+      },
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      "@styles": path.resolve(__dirname, "src/styles"),
+      "@img": path.resolve(__dirname, "src/img"),
     },
-})
+  },
+});
